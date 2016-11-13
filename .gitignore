@@ -1,0 +1,11 @@
+*.pyc
+__init__.py
+*.root
+*.o
+*.d
+*.so
+*.pcm
+NtupleAnalyzer/Analyzer
+NtupleAnalyzer/Reader
+NtupleProducer/test/NtupleProducer
+NtupleAnalyzer/Makefile

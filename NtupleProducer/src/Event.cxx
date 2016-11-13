@@ -10,7 +10,7 @@ Event::~Event()
 {
 }
 
-void Event::read(float xsec,float noe,int dataStream,bool issig)
+void Event::read(float xsec,float noe,int dataStream,bool issig,bool isttbar)
 {
    _id   = ntP->ev_id;
    _run  = ntP->ev_run;
@@ -21,6 +21,8 @@ void Event::read(float xsec,float noe,int dataStream,bool issig)
    _pv_ndof = ntP->pv_ndof;
    _pv_rho = ntP->pv_rho;
    _pv_isFake = ntP->pv_isFake;
+
+   _pv_z = ntP->pv_z;
    
    _metpt = ntP->met_pt;
    _metphi = ntP->met_phi;
@@ -32,6 +34,7 @@ void Event::read(float xsec,float noe,int dataStream,bool issig)
    _noe = noe;
    _isData = _isdata;
    _isSignal = issig;
+   _isttbar = isttbar;
    
    _isTrigMuon = 0;
    _isTrigElec = 0;
@@ -39,8 +42,10 @@ void Event::read(float xsec,float noe,int dataStream,bool issig)
    int nTrig = ntP->trigger_name->size();
    for(int it=0;it<nTrig;it++)
      {
-	if( ntP->trigger_name->at(it).find("HLT_IsoMu22_v") != std::string::npos ||
-	    ntP->trigger_name->at(it).find("HLT_IsoTkMu22_v") != std::string::npos )
+//	if( ntP->trigger_name->at(it).find("HLT_IsoMu22_v") != std::string::npos ||
+//	    ntP->trigger_name->at(it).find("HLT_IsoTkMu22_v") != std::string::npos )
+    if( ntP->trigger_name->at(it).find("HLT_IsoMu24_v2") != std::string::npos ||
+        ntP->trigger_name->at(it).find("HLT_IsoTkMu24_v2") != std::string::npos )
 	  {	     
 	     if( (_isData && dataStream == 1) || !_isData )
 	       {		  
@@ -48,8 +53,9 @@ void Event::read(float xsec,float noe,int dataStream,bool issig)
 	       }	     
 	  }	
 	
-	if( ntP->trigger_name->at(it).find("HLT_Ele35_WPLoose_Gsf_v") != std::string::npos ||
-	    ntP->trigger_name->at(it).find("HLT_Ele27_WPTight_Gsf_v") != std::string::npos )
+//	if( ntP->trigger_name->at(it).find("HLT_Ele35_WPLoose_Gsf_v") != std::string::npos ||
+//	    ntP->trigger_name->at(it).find("HLT_Ele27_WPTight_Gsf_v") != std::string::npos )
+    if( ntP->trigger_name->at(it).find("HLT_Ele32_eta2p1_WPTight_Gsf_v3") != std::string::npos )
 	  {	     
 	     if( (_isData && dataStream == 0) || !_isData )
 	       {		  
@@ -74,6 +80,8 @@ void Event::init()
    _pv_ndof = VDEF;
    _pv_rho = VDEF;
    _pv_isFake = VDEF;
+
+   _pv_z = VDEF;
    
    _xsec = VDEF;
    _noe = VDEF;   

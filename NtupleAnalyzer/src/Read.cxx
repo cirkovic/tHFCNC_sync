@@ -1,4 +1,4 @@
-#include "../include/Hist.h"
+#include "../include/Read.h"
 
 #include "TRandom3.h"
 
@@ -6,36 +6,8 @@
 #include <boost/function.hpp>
 #include <boost/type_traits.hpp>
 
-Hist::Hist(std::string home, int leptype)
+Read::Read()
 {
-   help = new Helper();
-   
-   _home = home;
-   _leptype = leptype;
-   fillCount = 0;
-   
-//   std::string foutlog = "log/"+std::string(flog);
-//   std::string foutlog = "log/list.txt";
-//   _fevc = fopen(foutlog.c_str(),"w");
-//   std::string foutlogVal = "log/"+std::string(flog)+".val";
-//   std::string foutlogVal = "log/list.val";
-//   _fevcVal.open(foutlogVal.c_str());
-   //_flog = fopen("/afs/cern.ch/user/c/cirkovic/www/24-10-2016/FCNC_sync_2/log.txt", "w");
-   //_flog = fopen("/afs/cern.ch/user/c/cirkovic/www/30-10-2016/FCNC_sync_2/log.txt", "w");
-   //_fmu = fopen("/afs/cern.ch/user/c/cirkovic/www/24-10-2016/FCNC_sync_2/EventInfo_mu.txt", "w");
-   //_fel = fopen("/afs/cern.ch/user/c/cirkovic/www/24-10-2016/FCNC_sync_2/EventInfo_el.txt", "w");
-   //_fmu = fopen("/afs/cern.ch/user/c/cirkovic/www/30-10-2016/FCNC_sync_2/EventInfo_mu.txt", "w");
-   if (_leptype)
-   //_fmu = fopen("/afs/cern.ch/user/c/cirkovic/www/09-11-2016/FCNC_sync_2/EventInfo_mu.txt", "w");
-        _flep = fopen("/afs/cern.ch/user/c/cirkovic/www/09-11-2016/FCNC_sync_2/EventInfo_mu.txt", "w");
-   //_fel = fopen("/afs/cern.ch/user/c/cirkovic/www/30-10-2016/FCNC_sync_2/EventInfo_el.txt", "w");
-   else {
-   //_fel = fopen("/afs/cern.ch/user/c/cirkovic/www/09-11-2016/FCNC_sync_2/EventInfo_el.txt", "w");
-        _flep = fopen("/afs/cern.ch/user/c/cirkovic/www/09-11-2016/FCNC_sync_2/EventInfo_el.txt", "w");
-        _felv = fopen("/afs/cern.ch/user/c/cirkovic/www/09-11-2016/FCNC_sync_2/EventInfo_el_vars.txt", "w");
-   }
-
-      
    _v_ElectronTight = new std::vector<Electron>;
    _v_ElectronLoose = new std::vector<Electron>;
    _v_MuonTight = new std::vector<Muon>;
@@ -47,7 +19,7 @@ Hist::Hist(std::string home, int leptype)
    _v_Lepton = new std::vector<Lepton>;
 }
 
-Hist::~Hist()
+Read::~Read()
 {
    delete _v_ElectronTight;
    delete _v_ElectronLoose;
@@ -58,13 +30,9 @@ Hist::~Hist()
    delete _v_NonBJetTight;
    
    delete _v_Lepton;
-
-   delete help;
-   delete _trec;
-   delete _mva;
 }
 
-void Hist::init()
+void Read::init()
 {
    rnd = new TRandom3(666);
    
@@ -196,8 +164,8 @@ void Hist::init()
 	  }
      }
 
-   _s_Hist = new std::vector<std::pair<std::vector<std::string>,double*> >();
-   _m1d_Hist = new std::map<std::string, TH1D*>();
+   _s_Read = new std::vector<std::pair<std::vector<std::string>,double*> >();
+   _m1d_Read = new std::map<std::string, TH1D*>();
 
    std::vector<double*> set_hist;
    set_hist.clear();
@@ -263,24 +231,24 @@ void Hist::init()
 			    names.push_back(titl);
 			    names.push_back(sys[s]);
 			    
-			    _s_Hist->push_back(std::make_pair(names,set_hist.at(h)));
+			    _s_Read->push_back(std::make_pair(names,set_hist.at(h)));
 			 }
 		    }		  
 	       }
 	  }
      }   
    
-   for(int i=0;i<_s_Hist->size();i++)
+   for(int i=0;i<_s_Read->size();i++)
      {
-	TH1D *_h1d = new TH1D(_s_Hist->at(i).first.at(0).c_str(),
-			      _s_Hist->at(i).first.at(0).c_str(),
-			      _s_Hist->at(i).second[0],
-			      _s_Hist->at(i).second[1],
-			      _s_Hist->at(i).second[2]);
+	TH1D *_h1d = new TH1D(_s_Read->at(i).first.at(0).c_str(),
+			      _s_Read->at(i).first.at(0).c_str(),
+			      _s_Read->at(i).second[0],
+			      _s_Read->at(i).second[1],
+			      _s_Read->at(i).second[2]);
 	
 	_h1d->Sumw2();
 	
-	_m1d_Hist->insert(std::pair<std::string,TH1D*>(_s_Hist->at(i).first.at(0),_h1d));
+	_m1d_Read->insert(std::pair<std::string,TH1D*>(_s_Read->at(i).first.at(0),_h1d));
      }
 
    for(int ss=0;ss<sel_n;ss++)
@@ -301,13 +269,11 @@ void Hist::init()
 	  }
      }
 
-   std::cout << "Hist initialisation done" << std::endl;
+   std::cout << "Read initialisation done" << std::endl;
 }
 
-void Hist::fill()
+void Read::fill()
 {
-   //std::cout << "CIRKOVIC: Hist::fill(" << ++fillCount << ")" << std::endl;
-
    float w = _v_Event->at(0).mc_weight();
    
    bool isTrigElec = _v_Event->at(0).isTrigElec();
@@ -400,116 +366,9 @@ void Hist::fill()
    
    int njets = _v_JetTight->size();
    int nbjets = _v_BJetTight->size();
-
-   /*
-   fprintf(_fevc,"%6d %6d %10d  %+2d  %6.2f %+4.2f %+4.2f    %6.1f  %+4.2f    %d %d \n",
-           run, lumi, id,
-           lepId, lepPt, lepEta, lepPhi,
-           metpt, metphi,
-           njets, nbjets);
-    */
-   /*
-   fprintf(_flog,"%6d %6d %10d    %6.1f  %+4.2f    %d %d \n",
-           run, lumi, id,
-           metpt, metphi,
-           njets, nbjets);
-   */
    
    int nElecLoose = _v_ElectronLoose->size();
    int nMuonLoose = _v_MuonLoose->size();
-
-   //std::cout << "    cirkovic: el(" << _v_Electron->size() << ")" << std::endl;
-   for(int ie=0;ie<_v_Electron->size();ie++)
-     {
-        //Lepton lep;
-        //lep.setLepton(&_v_Electron->at(ie),ie,1);
-        //_v_Lepton->push_back(lep);
-        /*
-        fprintf(_fel,"%6d %6d %10d  %+2d  %6.2f %+4.2f %+4.2f   %6.1f  %+4.2f    %d %d \n",
-                run, lumi, id,
-                lep.charge()*11, lep.pt(), lep.eta(), lep.phi(),
-                metpt, metphi,
-                njets, nbjets);
-        */
-        //std::cout << "    cirkovic: el(" << ie << ")" << std::endl;
-        if (!_leptype) {
-            Electron &el = _v_Electron->at(ie);
-            fprintf(_flep,"%6d %6d %10d  %+2d  %6.2f %+4.2f %+4.2f   %6.1f  %+4.2f    %d %d \n",
-                    run, lumi, id,
-                    el.charge()*11, el.pt(), el.eta(), el.phi(),
-                    metpt, metphi,
-                    njets, nbjets);
-            /*
-            fprintf(_felv,"%6d %6d %10d  %6.3f %6.5f %6.5f %6.5f %6.5f %6.5f %6.5f %6d \n",
-                    run, //event->runId(),
-                    lumi, //event->lumiBlockId(),
-                    id, //event->eventId(),
-                    lep.superClusterEta(), //selectedElectrons[0]->superClusterEta(),
-                    lep.deltaEtaIn(), //selectedElectrons[0]->deltaEtaIn(),
-                    lep.deltaPhiIn(), //selectedElectrons[0]->deltaPhiIn(),
-                    lep.sigmaIEtaIEta_full5x5(), //selectedElectrons[0]->sigmaIEtaIEta_full5x5(),
-                    lep.hadronicOverEm(), //selectedElectrons[0]->hadronicOverEm(),
-                    lep.ioEmIoP(), //selectedElectrons[0]->ioEmIoP(),
-                    lep.pfElectronIso(), //r2selection.pfElectronIso(selectedElectrons[0]),
-                    lep.missingHits() //selectedElectrons[0]->missingHits()
-                );
-             */
-            /*
-            fprintf(_felv,"%6d %6d %10d  %6.3f %6.5f %6.5f %6.5f %6.5f %6.5f %6.5f %6d \n",
-                    run, //event->runId(),
-                    lumi, //event->lumiBlockId(),
-                    id, //event->eventId(),
-                    0, //selectedElectrons[0]->superClusterEta(),
-                    0, //selectedElectrons[0]->deltaEtaIn(),
-                    0, //selectedElectrons[0]->deltaPhiIn(),
-                    0, //selectedElectrons[0]->sigmaIEtaIEta_full5x5(),
-                    0, //selectedElectrons[0]->hadronicOverEm(),
-                    0, //selectedElectrons[0]->ioEmIoP(),
-                    0, //r2selection.pfElectronIso(selectedElectrons[0]),
-                    0 //selectedElectrons[0]->missingHits()
-                );
-            */
-            //Electron *el = reinterpret_cast<Electron*>(&lep);
-            //fprintf(_felv,"%6d %6d %10d  %6.3f\n",
-            fprintf(_felv,"%6d %6d %10d  %6.3f %6.5f %6.5f %6.5f %6.5f %6.5f %6.5f %6d \n",
-                    run, //event->runId(),
-                    lumi, //event->lumiBlockId(),
-                    id, //event->eventId(),
-                    el.superClusterEta(), //selectedElectrons[0]->superClusterEta(),
-                    el.deltaEtaIn(), //selectedElectrons[0]->deltaEtaIn(),
-                    el.deltaPhiIn(), //selectedElectrons[0]->deltaPhiIn(),
-                    el.sigmaIEtaIEta_full5x5(), //selectedElectrons[0]->sigmaIEtaIEta_full5x5(),
-                    el.hadronicOverEm(), //selectedElectrons[0]->hadronicOverEm(),
-                    el.ioEmIoP(), //selectedElectrons[0]->ioEmIoP(),
-                    el.pfElectronIso(), //r2selection.pfElectronIso(selectedElectrons[0]),
-                    el.missingHits() //selectedElectrons[0]->missingHits()
-                );
-        }
-     }
-   //std::cout << "    cirkovic: el(" << _v_Muon->size() << ")" << std::endl;
-   for(int im=0;im<_v_Muon->size();im++)
-     {
-        //Lepton lep;
-        //lep.setLepton(&_v_Muon->at(im),im,0);
-        //_v_Lepton->push_back(lep);
-        /*
-        fprintf(_fmu,"%6d %6d %10d  %+2d  %6.2f %+4.2f %+4.2f   %6.1f  %+4.2f    %d %d \n",
-                run, lumi, id,
-                lep.charge()*13, lep.pt(), lep.eta(), lep.phi(),
-                metpt, metphi,
-                njets, nbjets);
-        */
-        //std::cout << "    cirkovic: mu(" << im << ")" << std::endl;
-        Muon &mu = _v_Muon->at(im);
-        if (_leptype)
-            fprintf(_flep,"%6d %6d %10d  %+2d  %6.2f %+4.2f %+4.2f   %6.1f  %+4.2f    %d %d \n",
-                    run, lumi, id,
-                    //lep.charge()*13, lep.pt(), lep.eta(), lep.phi(),
-                    mu.charge()*13, mu.pt(), mu.eta(), mu.phi(),
-                    metpt, metphi,
-                    njets, nbjets);
-     }
-   //std::cout << "    done" << std::endl;
 
    int nElecTight = _v_ElectronTight->size();
    int nMuonTight = _v_MuonTight->size();
@@ -555,22 +414,12 @@ void Hist::fill()
 	     Lepton lep;
 	     lep.setLepton(&_v_ElectronTight->at(ie),ie,1);
 	     _v_Lepton->push_back(lep);
-         //fprintf(_fel,"%6d %6d %10d  %+2d  %6.2f %+4.2f %+4.2f    %6.1f  %+4.2f    %d %d \n",
-         //        run, lumi, id,
-         //        lep.idx(), lep.pt(), lep.eta(), lep.phi(),
-         //        metpt, metphi,
-         //        njets, nbjets);
 	  }	
 	for(int im=0;im<_v_MuonTight->size();im++)
 	  {
 	     Lepton lep;
 	     lep.setLepton(&_v_MuonTight->at(im),im,0);
 	     _v_Lepton->push_back(lep);
-         //fprintf(_fmu,"%6d %6d %10d  %+2d  %6.2f %+4.2f %+4.2f    %6.1f  %+4.2f    %d %d \n",
-         //        run, lumi, id,
-         //        lep.idx(), lep.pt(), lep.eta(), lep.phi(),
-         //        metpt, metphi,
-         //        njets, nbjets);
 	  }
 	
 	_trec->setElectron(_v_ElectronTight);
@@ -696,11 +545,11 @@ void Hist::fill()
 	     int nHISTSEL = histNAMESSEL.size();
 	     for(int ih=0;ih<nHISTSEL;ih++)
 	       {		       
-		  TH1D *h = _m1d_Hist->find(histNAMESSEL.at(ih))->second;
+		  TH1D *h = _m1d_Read->find(histNAMESSEL.at(ih))->second;
 		  
 		  int hidx = ih;
 		  std::string varName = histname[histVAR[hidx]];
-		  fillHisto1D(h,sfj,sys[histSYS[hidx]],0,varName);
+		  fillReado1D(h,sfj,sys[histSYS[hidx]],0,varName);
 	       }
 	  }
      }
@@ -708,27 +557,22 @@ void Hist::fill()
    fillPassSel(_h_PassSel_all,_h_PassSel_e,_h_PassSel_m,w);
 }
 
-void Hist::close()
+void Read::close()
 {
    _fout->Write();
    _fout->Close();
 //   _fevc.close();
-//   _fevcVal.close();
-//  fclose(_flog);
-//  fclose(_fmu);
-//  fclose(_fel);
-  fclose(_flep);
-  fclose(_felv);
-
+   _fevcVal.close();
+   
 //   delete rnd;
 }
 
-void Hist::fillTree(int ic,int is)
+void Read::fillTree(int ic,int is)
 {
    _trout[ic][is]->Fill();
 }
 
-bool Hist::printout(bool doPrint)
+bool Read::printout(bool doPrint)
 {
 //	if( CHECK_BIT(passSel,1)
 //	  )
@@ -747,7 +591,7 @@ bool Hist::printout(bool doPrint)
    return 1;
 }
 
-void Hist::fillHisto1D(TH1D *h,float sfj,std::string sys,int ilep,std::string varName)
+void Read::fillReado1D(TH1D *h,float sfj,std::string sys,int ilep,std::string varName)
 {
 /*   if( strcmp(varName.c_str(),"h_H_m_") == 0 )
      {	
@@ -1045,7 +889,7 @@ void Hist::fillHisto1D(TH1D *h,float sfj,std::string sys,int ilep,std::string va
    else if( strcmp(varName.c_str(),"h_MVAb2j4HctTT_") == 0 ) h->Fill(_mvab2j4HctTT,sfj);
 }
 
-void Hist::fillPassSel(TH1D *h,TH1D *he,TH1D *hm,float w)
+void Read::fillPassSel(TH1D *h,TH1D *he,TH1D *hm,float w)
 {
    int nSel = h->GetXaxis()->GetNbins();
    for(int i=0;i<nSel;i++)

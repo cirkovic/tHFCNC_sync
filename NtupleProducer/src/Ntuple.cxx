@@ -30,10 +30,14 @@ void Ntuple::setBranchAddress()
 void Ntuple::createVar()
 {
    NtElectronLoose           = new std::vector<Electron>;
+   NtElectronMedium          = new std::vector<Electron>;
    NtElectronTight           = new std::vector<Electron>;
    
    NtMuonLoose               = new std::vector<Muon>;
    NtMuonTight               = new std::vector<Muon>;
+
+   NtElectronLooseExtra      = new std::vector<Electron>;
+   NtMuonLooseExtra          = new std::vector<Muon>;
 
    NtJetLoose               = new std::vector<Jet>;
    NtJetTight               = new std::vector<Jet>;
@@ -46,10 +50,14 @@ void Ntuple::createVar()
 void Ntuple::clearVar()
 {
    NtElectronLoose->clear();
+   NtElectronMedium->clear();
    NtElectronTight->clear();
    
    NtMuonLoose->clear();
    NtMuonTight->clear();
+
+   NtElectronLooseExtra->clear();
+   NtMuonLooseExtra->clear();
 
    NtJetLoose->clear();
    NtJetTight->clear();

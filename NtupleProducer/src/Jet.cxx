@@ -45,8 +45,8 @@ void Jet::read()
    if( CHECK(ntP->jet_genJet_phi) )              _genJetPhi   = ntP->jet_genJet_phi->at(idx);
    if( CHECK(ntP->jet_genJet_E) )                _genJetE   = ntP->jet_genJet_E->at(idx);
    
-   if( CHECK(ntP->jet_charge) )                _charge   = ntP->jet_charge->at(idx);
-   if( CHECK(ntP->jet_chargeVec) )             _chargeVec   = ntP->jet_chargeVec->at(idx);
+   //if( CHECK(ntP->jet_charge) )                _charge   = ntP->jet_charge->at(idx);
+   //if( CHECK(ntP->jet_chargeVec) )             _chargeVec   = ntP->jet_chargeVec->at(idx);
    
    if(_pt > 0.) _p4.SetPtEtaPhiE(_pt,_eta,_phi,_E);
 }
@@ -119,7 +119,8 @@ void Jet::init()
 void Jet::sel()
 {   
    bool passPt = (_pt > 30.);
-   bool passEta = (fabs(_eta) < 5.2);
+   //bool passEta = (fabs(_eta) < 5.2);
+   bool passEta = (fabs(_eta) < 2.4);
 
    TLorentzVector vjet;
    vjet.SetPtEtaPhiE(_pt,_eta,_phi,_E);

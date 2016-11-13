@@ -1,5 +1,6 @@
-#include "../include/Hist.h"
-#include "../include/ApplyMVA.h"
+#include "../include/Reader.h"
+//#include "../include/Hist.h"
+//#include "../include/ApplyMVA.h"
 //#include "ChargeMisid.h"
 //#include "RealEff.h"
 //#include "FakeRate.h"
@@ -14,7 +15,6 @@ char *tool;
 char *evc;
 std::string home;
 int nmax;
-int leptype;
 //int lept;
 //int lepm;
 //int imfake;
@@ -29,24 +29,24 @@ std::vector<Truth>             *v_Truth;
 
 int main(int argc, char *argv[])
 {
-   if( argc < 7 )
+   /*
+   if( argc < 6 )
      {
-	std::cout << "Usage: ./Analyzer [input file] [log file] [tool] [evc] [nmax] [home] [leptype]" << std::endl;
+	std::cout << "Usage: ./Reader [input file] [log file] [tool] [evc] [nmax] [home]" << std::endl;
 	exit(1);
      }   
-   
+   */
+   /*
    fin = argv[1];
    flog = argv[2];
    tool = argv[3];
    evc = argv[4];
    nmax = atoi(argv[5]);
    home = std::string(argv[6]);
-   leptype = atoi(argv[7]);
-   
+   */
    TChain f("Nt");
-   
+   /*
 //	std::stringstream fnamev(fin);
-    std::cout << "CIRKOVIC" << std::endl;
 
    std::ifstream infile;
    infile.open(fin);
@@ -60,6 +60,8 @@ int main(int argc, char *argv[])
      }	
    
    infile.close();
+   */
+   f.Add("/afs/cern.ch/work/c/cirkovic/FCNC_sync/CMSSW_8_0_12/src/tHFCNC/NtupleProducer/test/output.root");
 
    std::vector<Electron>             *v_Electron             = new std::vector<Electron>();
    std::vector<Muon>                 *v_Muon                 = new std::vector<Muon>();
@@ -74,7 +76,31 @@ int main(int argc, char *argv[])
    f.SetBranchAddress("Truth", &v_Truth);
 
    int nent = f.GetEntries();
-   std::cout << nent << std::endl;
+   std::cout << "Number of entries: " << nent << std::endl;
+
+    Read read();
+
+    for(int i=0;i<nent;i++)
+      {
+         std::cout << i << std::endl;
+         //if( nmax >= 0 && i > nmax ) break;
+
+         f.GetEntry(i);
+         read.analyze();
+
+         /*
+         std::string fcur = f.GetCurrentFile()->GetName();
+         if( strcmp(evc,"1") == 0 )
+           {
+          bool passFINAL = hist.printout(true);
+           }
+         else
+           {
+          bool passFINAL = hist.printout(false);
+          hist.fill();
+           }
+         */
+      }
    
 /*   SKYPLOT::FakeWeight fakeWeight;
    if( strcmp(tool,"realeff") != 0 &&
@@ -85,12 +111,12 @@ int main(int argc, char *argv[])
 	std::cout << "Read fake rate" << std::endl;
 	fakeWeight.readFakeRate();
      }   
-  */ 
-   std::cout << "Analyzer initialisation done" << std::endl;
+  * / 
+   std::cout << "Reader initialisation done" << std::endl;
    
    if( strcmp(tool,"plot") == 0 )
      {		
-	Hist hist(home, leptype);
+	Hist hist(home);
 	
 	hist.setElectron(v_Electron);
 	hist.setMuon(v_Muon);
@@ -107,7 +133,6 @@ int main(int argc, char *argv[])
 	
 	for(int i=0;i<nent;i++)
 	  {
-         //std::cout << i << std::endl;
 	     if( nmax >= 0 && i > nmax ) break;
 	     
 	     f.GetEntry(i);
@@ -225,11 +250,11 @@ int main(int argc, char *argv[])
 	  }   
 	
 	fakecr.close();
-     }*/
+     }* /
    else
      {
 	std::cout << "Select a proper tool" << std::endl;
 	exit(1);
      }   
-
+    */
 }

@@ -32,8 +32,13 @@ class Event : public Base
    bool isTrigMuon() {return _isTrigMuon;};
    bool isTrigElec() {return _isTrigElec;};
    
-   void read(float xsec,float noe,int dataStream,bool issig);
+   void read(float xsec,float noe,int dataStream,bool issig,bool isttbar=false);
    void init();
+
+   int isFake () {return _pv_isFake;};
+   int ndof() {return _pv_ndof;};
+   float pv_rho() {return _pv_rho;};
+   float z() {return _pv_z;};
 	
  protected:
 
@@ -54,6 +59,7 @@ class Event : public Base
    
    bool _isData;
    bool _isSignal;
+   bool _isttbar;
    
    bool _isTrigMuon;
    bool _isTrigElec;
@@ -62,6 +68,8 @@ class Event : public Base
    int _pv_ndof;
    float _pv_rho;
    int _pv_isFake;
+   
+   float _pv_z;
    
    ClassDef(Event,1)
 };

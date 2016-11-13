@@ -31,6 +31,7 @@ class Electron : public Base
    float dxy()         {return _dxy;};
    float dz()         {return _dz;};
    bool isLoose()         {return _isLoose;};
+   bool isMedium()         {return _isMedium;};
    bool isTight()         {return _isTight;};
    
    int charge()         {return _charge;};
@@ -41,6 +42,15 @@ class Electron : public Base
    bool isTightCBId()     {return _isTightCBId;};
    
    float relIso()     {return _relIso;};
+
+   float superClusterEta() {return _superClusterEta;};
+   float deltaEtaIn() {return _deltaEtaIn;};
+   float deltaPhiIn() {return _deltaPhiIn;};
+   float sigmaIEtaIEta_full5x5() {return _sigmaIEtaIEta_full5x5;};
+   float hadronicOverEm() {return _hadronicOverEm;};
+   float ioEmIoP() {return _ioEmIoP;};
+   float pfElectronIso() {return _pfElectronIso;};
+   int   missingHits() {return _missingHits;};
    
    void read();
    void init();
@@ -61,6 +71,7 @@ class Electron : public Base
    float _dxy;
    float _dz;
    bool _isLoose;
+   bool _isMedium;
    bool _isTight;
    
    int _charge;
@@ -71,6 +82,15 @@ class Electron : public Base
    bool _isTightCBId;
    
    float _relIso;
+
+   float _superClusterEta;
+   float _deltaEtaIn;
+   float _deltaPhiIn;
+   float _sigmaIEtaIEta_full5x5;
+   float _hadronicOverEm;
+   float _ioEmIoP;
+   float _pfElectronIso;
+   int   _missingHits;
    
    ClassDef(Electron,1)
 };

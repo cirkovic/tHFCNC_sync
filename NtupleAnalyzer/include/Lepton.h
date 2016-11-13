@@ -39,7 +39,7 @@ class Lepton
 	_isElectron = isE;
 	_charge = lep->charge();
      }
-   
+
  protected:
 
    float _pt;
@@ -53,6 +53,7 @@ class Lepton
    bool _isElectron;
    
    int _charge;
+
 };
 
 #endif

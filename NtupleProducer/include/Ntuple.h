@@ -18,10 +18,14 @@ class Ntuple
    virtual ~Ntuple();
    
    std::vector<Electron>* NtElectronLoose;
+   std::vector<Electron>* NtElectronMedium;
    std::vector<Electron>* NtElectronTight;
    
    std::vector<Muon>* NtMuonLoose;
    std::vector<Muon>* NtMuonTight;
+
+   std::vector<Electron>* NtElectronLooseExtra;
+   std::vector<Muon>* NtMuonLooseExtra;
 
    std::vector<Jet>* NtJetLoose;
    std::vector<Jet>* NtJetTight;

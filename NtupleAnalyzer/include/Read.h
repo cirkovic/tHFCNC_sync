@@ -9,13 +9,13 @@
 
 //#include "FakeWeight.h"
 
-class Hist
+class Read
 {
    
  public:
    
-   Hist(std::string home, int leptype);
-   virtual ~Hist();
+   Read(std::string home);
+   virtual ~Read();
    
    void setElectron(std::vector<Electron> *v)                  {_v_Electron = v;};
    void setMuon(std::vector<Muon> *v)                      {_v_Muon = v;};
@@ -39,7 +39,7 @@ class Hist
    unsigned int passSel_e;
    unsigned int passSel_m;
    
-   void fillHisto1D(TH1D *h,float sfj,std::string sys,int ilep,std::string varName);
+   void fillReado1D(TH1D *h,float sfj,std::string sys,int ilep,std::string varName);
 
    void fillPassSel(TH1D *h,TH1D *he,TH1D *hm,float sfj);
    
@@ -149,13 +149,13 @@ class Hist
    
 //   SKYPLOT::FakeWeight           _fakeWeight;
   
-   std::map<std::string, TH1D*> *_m1d_Hist;
+   std::map<std::string, TH1D*> *_m1d_Read;
    
    TH1D *_h_PassSel_all;
    TH1D *_h_PassSel_e;
    TH1D *_h_PassSel_m;
 
-   std::vector<std::pair<std::vector<std::string>,double*> > *_s_Hist;
+   std::vector<std::pair<std::vector<std::string>,double*> > *_s_Read;
 	
  private:
 
@@ -175,17 +175,10 @@ class Hist
 //	TLorentzVector *v_jet_sys_jerTotalLow;
 //	TLorentzVector *v_mu;
    
-   //FILE *_fevc;
-   //std::ofstream _fevcVal;
-   FILE *_flog;
-   //FILE *_fmu;
-   //FILE *_fel;
-   FILE *_flep;
-   FILE *_felv;
+   FILE *_fevc;
+   std::ofstream _fevcVal;
    
    std::string _home;
-   int _leptype;
-   int fillCount;
    
    TRandom3 *rnd;
    
