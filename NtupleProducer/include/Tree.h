@@ -108,7 +108,7 @@ public :
    Float_t         pv_yError;
    Float_t         pv_zError;
    Float_t         pv_chi2;
-   Int_t           pv_ndof;
+   Float_t         pv_ndof;
    Float_t         pv_rho;
    Int_t           pv_isFake;
    Float_t         mc_weight;

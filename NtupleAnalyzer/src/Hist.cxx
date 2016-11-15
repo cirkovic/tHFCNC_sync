@@ -26,13 +26,14 @@ Hist::Hist(std::string home, int leptype)
    //_fel = fopen("/afs/cern.ch/user/c/cirkovic/www/24-10-2016/FCNC_sync_2/EventInfo_el.txt", "w");
    //_fmu = fopen("/afs/cern.ch/user/c/cirkovic/www/30-10-2016/FCNC_sync_2/EventInfo_mu.txt", "w");
    if (_leptype)
-   //_fmu = fopen("/afs/cern.ch/user/c/cirkovic/www/09-11-2016/FCNC_sync_2/EventInfo_mu.txt", "w");
-        _flep = fopen("/afs/cern.ch/user/c/cirkovic/www/09-11-2016/FCNC_sync_2/EventInfo_mu.txt", "w");
+   //_fmu = fopen("/afs/cern.ch/user/c/cirkovic/www/14-11-2016/FCNC_sync_2/EventInfo_mu.txt", "w");
+        _flep = fopen("/afs/cern.ch/user/c/cirkovic/www/14-11-2016/FCNC_sync_2/EventInfo_mu.txt", "w");
    //_fel = fopen("/afs/cern.ch/user/c/cirkovic/www/30-10-2016/FCNC_sync_2/EventInfo_el.txt", "w");
    else {
-   //_fel = fopen("/afs/cern.ch/user/c/cirkovic/www/09-11-2016/FCNC_sync_2/EventInfo_el.txt", "w");
-        _flep = fopen("/afs/cern.ch/user/c/cirkovic/www/09-11-2016/FCNC_sync_2/EventInfo_el.txt", "w");
-        _felv = fopen("/afs/cern.ch/user/c/cirkovic/www/09-11-2016/FCNC_sync_2/EventInfo_el_vars.txt", "w");
+   //_fel = fopen("/afs/cern.ch/user/c/cirkovic/www/14-11-2016/FCNC_sync_2/EventInfo_el.txt", "w");
+        _flep = fopen("/afs/cern.ch/user/c/cirkovic/www/14-11-2016/FCNC_sync_2/EventInfo_el.txt", "w");
+        _felv = fopen("/afs/cern.ch/user/c/cirkovic/www/14-11-2016/FCNC_sync_2/EventInfo_el_vars.txt", "w");
+        _felv1 = fopen("/afs/cern.ch/user/c/cirkovic/www/14-11-2016/FCNC_sync_2/EventInfo_el_vars_1.txt", "w");
    }
 
       
@@ -484,6 +485,24 @@ void Hist::fill()
                     el.pfElectronIso(), //r2selection.pfElectronIso(selectedElectrons[0]),
                     el.missingHits() //selectedElectrons[0]->missingHits()
                 );
+            fprintf(_felv1,"%6d %6d %10d  %6.3f %6.5f %6.5f %6.5f %6.5f %6.5f %6.5f %6d %6.5f %6.5f %6.5f %6.5f %6.5f \n",
+                    run, //event->runId(),
+                    lumi, //event->lumiBlockId(),
+                    id, //event->eventId(),
+                    el.superClusterEta(), //selectedElectrons[0]->superClusterEta(),
+                    el.deltaEtaIn(), //selectedElectrons[0]->deltaEtaIn(),
+                    el.deltaPhiIn(), //selectedElectrons[0]->deltaPhiIn(),
+                    el.sigmaIEtaIEta_full5x5(), //selectedElectrons[0]->sigmaIEtaIEta_full5x5(),
+                    el.hadronicOverEm(), //selectedElectrons[0]->hadronicOverEm(),
+                    el.ioEmIoP(), //selectedElectrons[0]->ioEmIoP(),
+                    el.pfElectronIso(), //r2selection.pfElectronIso(selectedElectrons[0]),
+                    el.missingHits(), //selectedElectrons[0]->missingHits()
+                    el.sumChargedHadronPt(),
+                    el.sumNeutralHadronEt(),
+                    el.sumPhotonEt(),
+                    el.rho(),
+                    el.Aeff()
+                );
         }
      }
    //std::cout << "    cirkovic: el(" << _v_Muon->size() << ")" << std::endl;
@@ -719,6 +738,7 @@ void Hist::close()
 //  fclose(_fel);
   fclose(_flep);
   fclose(_felv);
+  fclose(_felv1);
 
 //   delete rnd;
 }

@@ -10,6 +10,28 @@ Electron::~Electron()
 {
 }
 
+double Electron::effArea(double _eta)
+{
+   double EffArea = 0.0;
+
+   if     ( fabs(_eta) >= 0.0000 && fabs(_eta) < 1.0000 )   EffArea = 0.1703;
+   else if( fabs(_eta) >= 1.0000 && fabs(_eta) < 1.4790 )   EffArea = 0.1715;
+   else if( fabs(_eta) >= 1.4790 && fabs(_eta) < 2.0000 )   EffArea = 0.1213;
+   else if( fabs(_eta) >= 2.0000 && fabs(_eta) < 2.2000 )   EffArea = 0.1230;
+   else if( fabs(_eta) >= 2.2000 && fabs(_eta) < 2.3000 )   EffArea = 0.1635;
+   else if( fabs(_eta) >= 2.3000 && fabs(_eta) < 2.4000 )   EffArea = 0.1937;
+   else if( fabs(_eta) >= 2.4000 && fabs(_eta) < 5.0000 )   EffArea = 0.2393;
+
+   return EffArea;
+}
+
+
+double Electron::effAreaCorrection(double _eta)
+{
+   return ntP->ev_rho * effArea(_eta);
+   //return ntP->pv_rho * effArea(_eta);
+}
+
 void Electron::read()
 {
    _ID = idx;
@@ -39,8 +61,17 @@ void Electron::read()
    _hadronicOverEm = ntP->el_hadronicOverEm->at(idx);
    _ioEmIoP = ntP->el_IoEmIoP->at(idx);
    //_pfElectronIso = ntP->el_ecalPFClusterIso->at(idx); // el_ecalPFClusterIso, el_hcalPFClusterIso, el_pfIso_sumChargedHadronPt, el_pfIso_sumNeutralHadronEt, el_pfIso_sumPhotonEt, el_pfIso_sumPUPt
-   _pfElectronIso = (ntP->el_pfIso_sumChargedHadronPt->at(idx)+ std::max(ntP->el_pfIso_sumNeutralHadronEt->at(idx)+ntP->el_pfIso_sumPhotonEt->at(idx)-0.5*ntP->el_pfIso_sumPUPt->at(idx),0.0))/_pt; // el_ecalPFClusterIso, el_hcalPFClusterIso, el_pfIso_sumChargedHadronPt, el_pfIso_sumNeutralHadronEt, el_pfIso_sumPhotonEt, el_pfIso_sumPUPt
+   //_pfElectronIso = (ntP->el_pfIso_sumChargedHadronPt->at(idx)+ std::max(ntP->el_pfIso_sumNeutralHadronEt->at(idx)+ntP->el_pfIso_sumPhotonEt->at(idx)-0.5*ntP->el_pfIso_sumPUPt->at(idx),0.0))/_pt; // el_ecalPFClusterIso, el_hcalPFClusterIso, el_pfIso_sumChargedHadronPt, el_pfIso_sumNeutralHadronEt, el_pfIso_sumPhotonEt, el_pfIso_sumPUPt
+   _pfElectronIso = (ntP->el_pfIso_sumChargedHadronPt->at(idx)+ std::max(0.0, ntP->el_pfIso_sumNeutralHadronEt->at(idx)+ntP->el_pfIso_sumPhotonEt->at(idx)-effAreaCorrection(_eta)))/_pt; // el_ecalPFClusterIso, el_hcalPFClusterIso, el_pfIso_sumChargedHadronPt, el_pfIso_sumNeutralHadronEt, el_pfIso_sumPhotonEt, el_pfIso_sumPUPt
    _missingHits = ntP->el_numberOfLostHits->at(idx); // el_numberOfLostPixelHits, el_numberOfLostHits, el_numberOfLostHitsDefault, el_expectedMissingInnerHits, el_expectedMissingOuterHits
+
+   _sumChargedHadronPt = ntP->el_pfIso_sumChargedHadronPt->at(idx);
+   _sumNeutralHadronEt = ntP->el_pfIso_sumNeutralHadronEt->at(idx);
+   _sumPhotonEt = ntP->el_pfIso_sumPhotonEt->at(idx);
+   _rho = ntP->ev_rho;
+   //_rho = ntP->pv_rho;
+   _Aeff = effArea(_eta);
+   
 }
 
 void Electron::init()
@@ -75,6 +106,12 @@ void Electron::init()
    _pfElectronIso = 0;
    _missingHits = 0;
 
+   _sumChargedHadronPt = 0;
+   _sumNeutralHadronEt = 0;
+   _sumPhotonEt = 0;
+   _rho = 0;
+   _Aeff = 0;
+
 }
 
 void Electron::sel()
@@ -89,9 +126,16 @@ void Electron::sel()
    bool passCrack = !(abs(_scleta) > 1.4442 && abs(_scleta) < 1.5660);   
    bool passConversionVeto = ntP->el_passConversionVeto->at(idx);
    
-   _relIso = (ntP->el_pfIso_sumChargedHadronPt->at(idx)+
-	      std::max(ntP->el_pfIso_sumNeutralHadronEt->at(idx)+ntP->el_pfIso_sumPhotonEt->at(idx)-
-		       0.5*ntP->el_pfIso_sumPUPt->at(idx),0.0))/_pt;
+   //_relIso = (ntP->el_pfIso_sumChargedHadronPt->at(idx)+
+   //      std::max(ntP->el_pfIso_sumNeutralHadronEt->at(idx)+ntP->el_pfIso_sumPhotonEt->at(idx)-
+   //	       0.5*ntP->el_pfIso_sumPUPt->at(idx),0.0))/_pt;
+
+   _relIso = (ntP->el_pfIso_sumChargedHadronPt->at(idx) +
+              //std::max(0.0, ntP->el_pfIso_sumNeutralHadronPt->at(idx) + ntP->el_pfIso_sumPhotonPt->at(idx) - correction)
+              //std::max(0.0, ntP->el_pfIso_sumNeutralHadronEt->at(idx) + ntP->el_pfIso_sumPhotonEt->at(idx) - correction)
+              std::max(0.0, ntP->el_pfIso_sumNeutralHadronEt->at(idx) + ntP->el_pfIso_sumPhotonEt->at(idx) - effAreaCorrection(_eta))
+             )/_pt;
+
    
    bool passRelIsoLoose = (_relIso < 0.25);
    bool passRelIsoMedium = (_relIso < 0.20);
@@ -108,6 +152,7 @@ void Electron::sel()
 	       _isLooseCBId &&
 	      true );
 
+   /*
    _isMedium = (
            passPtMedium &&
            passEtaMedium &&
@@ -115,9 +160,39 @@ void Electron::sel()
            //passDz &&
            //passCrack &&
            //passConversionVeto &&
-           //passRelIsoMedium &&
+           passRelIsoMedium &&
            _isMediumCBId &&
           true );
+    */
+
+    if (fabs(_superClusterEta) <= 1.479) {
+       _isMedium = (
+               passPtMedium &&
+               passEtaMedium &&
+               _sigmaIEtaIEta_full5x5 <  0.00998 &&
+               fabs(_deltaEtaIn)      <  0.00311 &&
+               fabs(_deltaPhiIn)      <  0.103   &&
+               _hadronicOverEm        <  0.253   &&
+               _relIso                <  0.0695  &&
+               fabs(_ioEmIoP)         <  0.134   &&
+               _missingHits           <= 1       &&
+               passConversionVeto                &&
+              true );
+    }
+    else if (fabs(_superClusterEta) > 1.479) {
+       _isMedium = (
+               passPtMedium &&
+               passEtaMedium &&
+               _sigmaIEtaIEta_full5x5 <  0.0298  &&
+               fabs(_deltaEtaIn)      <  0.00609 &&
+               fabs(_deltaPhiIn)      <  0.045   &&
+               _hadronicOverEm        <  0.0878  &&
+               _relIso                <  0.0821  &&
+               fabs(_ioEmIoP)         <  0.13    &&
+               _missingHits           <= 1       &&
+               passConversionVeto                &&
+              true );
+    }
 
    _isTight = (
 	       _isLoose &&

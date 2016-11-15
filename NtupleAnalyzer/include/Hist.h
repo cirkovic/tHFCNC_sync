@@ -182,6 +182,7 @@ class Hist
    //FILE *_fel;
    FILE *_flep;
    FILE *_felv;
+   FILE *_felv1;
    
    std::string _home;
    int _leptype;

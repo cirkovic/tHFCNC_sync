@@ -36,7 +36,7 @@ class Event : public Base
    void init();
 
    int isFake () {return _pv_isFake;};
-   int ndof() {return _pv_ndof;};
+   float ndof() {return _pv_ndof;};
    float pv_rho() {return _pv_rho;};
    float z() {return _pv_z;};
 	

@@ -54,6 +54,14 @@ class Electron : public Base
    
    void read();
    void init();
+   double effArea(double _eta);
+   double effAreaCorrection(double _eta);
+
+   double sumChargedHadronPt() {return _sumChargedHadronPt;};
+   double sumNeutralHadronEt() {return _sumNeutralHadronEt;};
+   double sumPhotonEt() {return _sumPhotonEt;};
+   double rho() {return _rho;};
+   double Aeff() {return _Aeff;};
 	
  protected:
 
@@ -91,6 +99,12 @@ class Electron : public Base
    float _ioEmIoP;
    float _pfElectronIso;
    int   _missingHits;
+
+   double _sumChargedHadronPt;
+   double _sumNeutralHadronEt;
+   double _sumPhotonEt;
+   double _rho;
+   double _Aeff;
    
    ClassDef(Electron,1)
 };

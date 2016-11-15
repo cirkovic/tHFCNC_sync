@@ -120,6 +120,8 @@ int main(int argc, char *argv[])
        jetfile.open("jetse.txt");
    jetfile.close();
 
+   FILE *_fev = fopen("/afs/cern.ch/user/c/cirkovic/www/14-11-2016/FCNC_sync_2/eventlist1.txt", "w");
+
    std::cout << fname << std::endl;
    Tree tree(0,const_cast<char*>(fname),stream);
    ntP = &tree;
@@ -181,10 +183,15 @@ int main(int argc, char *argv[])
 	ev.read(xsec,noe,dataStream,issig,isttbar);
     //std::cout << "isFake: " << ev.isFake() << ", ndof: " ev.ndof() << ", rho: " << ev.rho() << ", z: " << ev.z() << std::endl;
     if (ev.isFake() || ev.ndof() < 4 || ev.pv_rho() > 2 || fabs(ev.z()) > 24) {
+    //if (ev.isFake() || ev.ndof() < 4 || ev.rho() > 2 || fabs(ev.z()) > 24) {
         std::cout << "isFake: " << ev.isFake() << ", ndof: " << ev.ndof() << ", rho: " << ev.pv_rho() << ", z: " << ev.z() << std::endl;
         continue;
     }
     Nev++;
+
+    //fprintf(_fev,"%6d %6d %10d\n", ev.id(), ev.run(), ev.lumi());
+    fprintf(_fev,"%6d %6d %10d %6d %6.5f %6.5f %6.5f  \n", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
+
 
     if (leptontype && (!ev.isTrigMuon())) continue;
     else if ((!leptontype) && (!ev.isTrigElec())) continue;
@@ -334,6 +341,8 @@ int main(int argc, char *argv[])
        jetfile.open("jetse.txt");
    jetfile << N3j << "\n";
    jetfile.close();
+
+   fclose(_fev);
 
    std::cout << "Output events = " << nt->m_tree->GetEntries() << std::endl;
 
