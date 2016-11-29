@@ -120,7 +120,31 @@ int main(int argc, char *argv[])
        jetfile.open("jetse.txt");
    jetfile.close();
 
-   FILE *_fev = fopen("/afs/cern.ch/user/c/cirkovic/www/14-11-2016/FCNC_sync_2/eventlist1.txt", "w");
+   //FILE *_fev = fopen("/afs/cern.ch/user/c/cirkovic/www/14-11-2016/FCNC_sync_2/eventlist1.txt", "w");
+   //FILE *_fev = fopen("/afs/cern.ch/user/c/cirkovic/www/15-11-2016/FCNC_sync_2/eventlist1.txt", "w");
+   //FILE *_fev = fopen("/afs/cern.ch/user/c/cirkovic/www/16a-11-2016/FCNC_sync_2/eventlist1.txt", "w");
+   /*
+   FILE *_fev1 = fopen("/afs/cern.ch/user/c/cirkovic/www/16b-11-2016/FCNC_sync_2/eventlist1.txt", "w");
+   FILE *_fev2 = fopen("/afs/cern.ch/user/c/cirkovic/www/16b-11-2016/FCNC_sync_2/eventlist2.txt", "w");
+   FILE *_fev3 = fopen("/afs/cern.ch/user/c/cirkovic/www/16b-11-2016/FCNC_sync_2/eventlist3.txt", "w");
+   FILE *_fev4 = fopen("/afs/cern.ch/user/c/cirkovic/www/16b-11-2016/FCNC_sync_2/eventlist4.txt", "w");
+   FILE *_fev5 = fopen("/afs/cern.ch/user/c/cirkovic/www/16b-11-2016/FCNC_sync_2/eventlist5.txt", "w");
+   FILE *_fev6 = fopen("/afs/cern.ch/user/c/cirkovic/www/16b-11-2016/FCNC_sync_2/eventlist6.txt", "w");
+   */
+   /*
+   FILE *_fev1 = fopen("/afs/cern.ch/user/c/cirkovic/www/16c-11-2016/FCNC_sync_2/eventlist1.txt", "w");
+   FILE *_fev2 = fopen("/afs/cern.ch/user/c/cirkovic/www/16c-11-2016/FCNC_sync_2/eventlist2.txt", "w");
+   FILE *_fev3 = fopen("/afs/cern.ch/user/c/cirkovic/www/16c-11-2016/FCNC_sync_2/eventlist3.txt", "w");
+   FILE *_fev4 = fopen("/afs/cern.ch/user/c/cirkovic/www/16c-11-2016/FCNC_sync_2/eventlist4.txt", "w");
+   FILE *_fev5 = fopen("/afs/cern.ch/user/c/cirkovic/www/16c-11-2016/FCNC_sync_2/eventlist5.txt", "w");
+   FILE *_fev6 = fopen("/afs/cern.ch/user/c/cirkovic/www/16c-11-2016/FCNC_sync_2/eventlist6.txt", "w");
+   */
+   FILE *_fev1 = fopen("/afs/cern.ch/user/c/cirkovic/www/16d-11-2016/FCNC_sync_2/eventlist1.txt", "w");
+   FILE *_fev2 = fopen("/afs/cern.ch/user/c/cirkovic/www/16d-11-2016/FCNC_sync_2/eventlist2.txt", "w");
+   FILE *_fev3 = fopen("/afs/cern.ch/user/c/cirkovic/www/16d-11-2016/FCNC_sync_2/eventlist3.txt", "w");
+   FILE *_fev4 = fopen("/afs/cern.ch/user/c/cirkovic/www/16d-11-2016/FCNC_sync_2/eventlist4.txt", "w");
+   FILE *_fev5 = fopen("/afs/cern.ch/user/c/cirkovic/www/16d-11-2016/FCNC_sync_2/eventlist5.txt", "w");
+   FILE *_fev6 = fopen("/afs/cern.ch/user/c/cirkovic/www/16d-11-2016/FCNC_sync_2/eventlist6.txt", "w");
 
    std::cout << fname << std::endl;
    Tree tree(0,const_cast<char*>(fname),stream);
@@ -190,12 +214,65 @@ int main(int argc, char *argv[])
     Nev++;
 
     //fprintf(_fev,"%6d %6d %10d\n", ev.id(), ev.run(), ev.lumi());
-    fprintf(_fev,"%6d %6d %10d %6d %6.5f %6.5f %6.5f  \n", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
+    //fprintf(_fev,"%6d %6d %10d %6d %6.5f %6.5f %6.5f  \n", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
+    //fprintf(_fev1,"%6d %6d %10d %6d %6.5f %6.5f %6.5f  \n", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
+    fprintf(_fev1,"%6d %6d %10d %6d %6.5f %6.5f %6.5f", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
+    for(int j=0;j<ntP->jet_n;j++)
+      {
+         idx = j;
 
+         jet.init();
+         jet.read();
+         jet.sel();
 
+         //if( jet.isTight() )
+         if( jet.isLoose() )
+             fprintf(_fev1,"  %6.2f %+4.2f %+4.2f",
+                jet.pt(), jet.eta(), jet.phi());
+      }
+    fprintf(_fev1,"\n");
+    /*
     if (leptontype && (!ev.isTrigMuon())) continue;
     else if ((!leptontype) && (!ev.isTrigElec())) continue;
     Ntm++;
+
+    //fprintf(_fev2,"%6d %6d %10d %6d %6.5f %6.5f %6.5f  \n", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
+    fprintf(_fev2,"%6d %6d %10d %6d %6.5f %6.5f %6.5f", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
+    for(int j=0;j<ntP->jet_n;j++)
+      {
+         idx = j;
+
+         jet.init();
+         jet.read();
+         jet.sel();
+
+         if( jet.isTight() )
+             fprintf(_fev2,"  %6.2f %+4.2f %+4.2f",
+                jet.pt(), jet.eta(), jet.phi());
+      }
+    fprintf(_fev2,"\n");
+    */
+
+    if (!ev.isTrigMuon() && !ev.isTrigElec()) continue;
+    Ntm++;
+
+    //fprintf(_fev2,"%6d %6d %10d %6d %6.5f %6.5f %6.5f  \n", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
+    fprintf(_fev2,"%6d %6d %10d %6d %6.5f %6.5f %6.5f", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
+    for(int j=0;j<ntP->jet_n;j++)
+      {
+         idx = j;
+
+         jet.init();
+         jet.read();
+         jet.sel();
+
+         //if( jet.isTight() )
+         if( jet.isLoose() )
+             fprintf(_fev2,"  %6.2f %+4.2f %+4.2f",
+                jet.pt(), jet.eta(), jet.phi());
+      }
+    fprintf(_fev2,"\n");
+
 	
 	nt->NtEvent->push_back(ev);
 	
@@ -245,18 +322,68 @@ int main(int argc, char *argv[])
     int nElecLooseExtra = nt->NtElectronLooseExtra->size();
     int nMuonLooseExtra = nt->NtMuonLooseExtra->size();
 
-
     if (leptontype && (nMuonTight != 1)) continue;
     else if ((!leptontype) && (nElecMedium != 1)) continue;
     N1xl++;
+
+    //fprintf(_fev3,"%6d %6d %10d %6d %6.5f %6.5f %6.5f  \n", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
+    fprintf(_fev3,"%6d %6d %10d %6d %6.5f %6.5f %6.5f", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
+    for(int j=0;j<ntP->jet_n;j++)
+      {
+         idx = j;
+
+         jet.init();
+         jet.read();
+         jet.sel();
+
+         //if( jet.isTight() )
+         if( jet.isLoose() )
+             fprintf(_fev3,"  %6.2f %+4.2f %+4.2f",
+                jet.pt(), jet.eta(), jet.phi());
+      }
+    fprintf(_fev3,"\n");
 
     if (leptontype && (nElecLoose > 0)) continue;
     else if ((!leptontype) && (nMuonLoose > 0)) continue;
     Nnll++;
 
+    //fprintf(_fev4,"%6d %6d %10d %6d %6.5f %6.5f %6.5f  \n", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
+    fprintf(_fev4,"%6d %6d %10d %6d %6.5f %6.5f %6.5f", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
+    for(int j=0;j<ntP->jet_n;j++)
+      {
+         idx = j;
+
+         jet.init();
+         jet.read();
+         jet.sel();
+
+         //if( jet.isTight() )
+         if( jet.isLoose() )
+             fprintf(_fev4,"  %6.2f %+4.2f %+4.2f",
+                jet.pt(), jet.eta(), jet.phi());
+      }
+    fprintf(_fev4,"\n");
+
     if (leptontype && (nMuonLooseExtra > 0)) continue;
     else if ((!leptontype) && (nElecLooseExtra > 0)) continue;
     Nvll++;
+
+    //fprintf(_fev5,"%6d %6d %10d %6d %6.5f %6.5f %6.5f  \n", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
+    fprintf(_fev5,"%6d %6d %10d %6d %6.5f %6.5f %6.5f", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
+    for(int j=0;j<ntP->jet_n;j++)
+      {
+         idx = j;
+
+         jet.init();
+         jet.read();
+         jet.sel();
+
+         //if( jet.isTight() )
+         if( jet.isLoose() )
+             fprintf(_fev5,"  %6.2f %+4.2f %+4.2f",
+                jet.pt(), jet.eta(), jet.phi());
+      }
+    fprintf(_fev5,"\n");
 
 	// jets
 	for(int j=0;j<ntP->jet_n;j++)
@@ -301,8 +428,28 @@ int main(int argc, char *argv[])
 	     nt->fill();
 	  }
     */
-    if (nJetTight < 3) continue;
+    //if (nJetTight < 3) continue;
+    //if (nJetLoose < 3) continue;
+    if (nJetLoose < 2) continue;
     N3j++;
+
+    //CIRKOVICfprintf(_fev6,"%6d %6d %10d %6d %6.5f %6.5f %6.5f  \n", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
+    fprintf(_fev6,"%6d %6d %10d %6d %6.5f %6.5f %6.5f", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
+    for(int j=0;j<ntP->jet_n;j++)
+      {
+         idx = j;
+
+         jet.init();
+         jet.read();
+         jet.sel();
+
+         //if( jet.isTight() )
+         if( jet.isLoose() )
+             fprintf(_fev6,"  %6.2f %+4.2f %+4.2f",
+                jet.pt(), jet.eta(), jet.phi());
+      }
+    fprintf(_fev6,"\n");
+
 
     //std::cout << "cirkovic: filling #" << N3j << std::endl;
     nt->fill();
@@ -342,7 +489,13 @@ int main(int argc, char *argv[])
    jetfile << N3j << "\n";
    jetfile.close();
 
-   fclose(_fev);
+   //fclose(_fev);
+   fclose(_fev1);
+   fclose(_fev2);
+   fclose(_fev3);
+   fclose(_fev4);
+   fclose(_fev5);
+   fclose(_fev6);
 
    std::cout << "Output events = " << nt->m_tree->GetEntries() << std::endl;
 

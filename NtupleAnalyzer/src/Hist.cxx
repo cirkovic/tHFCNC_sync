@@ -25,15 +25,41 @@ Hist::Hist(std::string home, int leptype)
    //_fmu = fopen("/afs/cern.ch/user/c/cirkovic/www/24-10-2016/FCNC_sync_2/EventInfo_mu.txt", "w");
    //_fel = fopen("/afs/cern.ch/user/c/cirkovic/www/24-10-2016/FCNC_sync_2/EventInfo_el.txt", "w");
    //_fmu = fopen("/afs/cern.ch/user/c/cirkovic/www/30-10-2016/FCNC_sync_2/EventInfo_mu.txt", "w");
-   if (_leptype)
+   /*
+   if (_leptype) {
    //_fmu = fopen("/afs/cern.ch/user/c/cirkovic/www/14-11-2016/FCNC_sync_2/EventInfo_mu.txt", "w");
-        _flep = fopen("/afs/cern.ch/user/c/cirkovic/www/14-11-2016/FCNC_sync_2/EventInfo_mu.txt", "w");
+//        _flep = fopen("/afs/cern.ch/user/c/cirkovic/www/14-11-2016/FCNC_sync_2/EventInfo_mu.txt", "w");
+        _flep = fopen("/afs/cern.ch/user/c/cirkovic/www/16b-11-2016/FCNC_sync_2/EventInfo_mu.txt", "w");
+        _fjm = fopen("/afs/cern.ch/user/c/cirkovic/www/16b-11-2016/FCNC_sync_2/EventInfo_mu_jetVars.txt", "w");
    //_fel = fopen("/afs/cern.ch/user/c/cirkovic/www/30-10-2016/FCNC_sync_2/EventInfo_el.txt", "w");
+   }
    else {
    //_fel = fopen("/afs/cern.ch/user/c/cirkovic/www/14-11-2016/FCNC_sync_2/EventInfo_el.txt", "w");
-        _flep = fopen("/afs/cern.ch/user/c/cirkovic/www/14-11-2016/FCNC_sync_2/EventInfo_el.txt", "w");
-        _felv = fopen("/afs/cern.ch/user/c/cirkovic/www/14-11-2016/FCNC_sync_2/EventInfo_el_vars.txt", "w");
-        _felv1 = fopen("/afs/cern.ch/user/c/cirkovic/www/14-11-2016/FCNC_sync_2/EventInfo_el_vars_1.txt", "w");
+        //_flep = fopen("/afs/cern.ch/user/c/cirkovic/www/14-11-2016/FCNC_sync_2/EventInfo_el.txt", "w");
+        _flep = fopen("/afs/cern.ch/user/c/cirkovic/www/16b-11-2016/FCNC_sync_2/EventInfo_el.txt", "w");
+        //_felv = fopen("/afs/cern.ch/user/c/cirkovic/www/14-11-2016/FCNC_sync_2/EventInfo_el_vars.txt", "w");
+        _felv = fopen("/afs/cern.ch/user/c/cirkovic/www/16b-11-2016/FCNC_sync_2/EventInfo_el_vars.txt", "w");
+        //_felv1 = fopen("/afs/cern.ch/user/c/cirkovic/www/14-11-2016/FCNC_sync_2/EventInfo_el_vars_1.txt", "w");
+        _felv1 = fopen("/afs/cern.ch/user/c/cirkovic/www/16b-11-2016/FCNC_sync_2/EventInfo_el_vars_1.txt", "w");
+        _fje = fopen("/afs/cern.ch/user/c/cirkovic/www/16b-11-2016/FCNC_sync_2/EventInfo_el_jetVars.txt", "w");
+   }
+    */
+   if (_leptype) {
+   //_fmu = fopen("/afs/cern.ch/user/c/cirkovic/www/14-11-2016/FCNC_sync_2/EventInfo_mu.txt", "w");
+//        _flep = fopen("/afs/cern.ch/user/c/cirkovic/www/14-11-2016/FCNC_sync_2/EventInfo_mu.txt", "w");
+        _flep = fopen("/afs/cern.ch/user/c/cirkovic/www/16c-11-2016/FCNC_sync_2/EventInfo_mu.txt", "w");
+        _fjm = fopen("/afs/cern.ch/user/c/cirkovic/www/16c-11-2016/FCNC_sync_2/EventInfo_mu_jetVars.txt", "w");
+   //_fel = fopen("/afs/cern.ch/user/c/cirkovic/www/30-10-2016/FCNC_sync_2/EventInfo_el.txt", "w");
+   }
+   else {
+   //_fel = fopen("/afs/cern.ch/user/c/cirkovic/www/14-11-2016/FCNC_sync_2/EventInfo_el.txt", "w");
+        //_flep = fopen("/afs/cern.ch/user/c/cirkovic/www/14-11-2016/FCNC_sync_2/EventInfo_el.txt", "w");
+        _flep = fopen("/afs/cern.ch/user/c/cirkovic/www/16c-11-2016/FCNC_sync_2/EventInfo_el.txt", "w");
+        //_felv = fopen("/afs/cern.ch/user/c/cirkovic/www/14-11-2016/FCNC_sync_2/EventInfo_el_vars.txt", "w");
+        _felv = fopen("/afs/cern.ch/user/c/cirkovic/www/16c-11-2016/FCNC_sync_2/EventInfo_el_vars.txt", "w");
+        //_felv1 = fopen("/afs/cern.ch/user/c/cirkovic/www/14-11-2016/FCNC_sync_2/EventInfo_el_vars_1.txt", "w");
+        _felv1 = fopen("/afs/cern.ch/user/c/cirkovic/www/16c-11-2016/FCNC_sync_2/EventInfo_el_vars_1.txt", "w");
+        _fje = fopen("/afs/cern.ch/user/c/cirkovic/www/16c-11-2016/FCNC_sync_2/EventInfo_el_jetVars.txt", "w");
    }
 
       
@@ -503,6 +529,21 @@ void Hist::fill()
                     el.rho(),
                     el.Aeff()
                 );
+            //fprintf(_fje,"%6d %6d %10d  %+2d  %6.2f %+4.2f %+4.2f   %6.1f  %+4.2f    %d %d  %6.2f %+4.2f %+4.2f\n",
+            //        run, lumi, id,
+            //        el.charge()*11, el.pt(), el.eta(), el.phi(),
+            //        metpt, metphi,
+            //        njets, nbjets,
+            //        _v_JetTight->at(0).pt(), _v_JetTight->at(0).eta(), _v_JetTight->at(0).phi());
+            fprintf(_fje,"%6d %6d %10d  %+2d  %6.2f %+4.2f %+4.2f   %6.1f  %+4.2f    %d %d",
+                    run, lumi, id,
+                    el.charge()*11, el.pt(), el.eta(), el.phi(),
+                    metpt, metphi,
+                    njets, nbjets);
+            for(int i=0;i<_v_JetTight->size();i++)
+                 fprintf(_fje,"  %6.2f %+4.2f %+4.2f",
+                    _v_JetTight->at(i).pt(), _v_JetTight->at(i).eta(), _v_JetTight->at(i).phi());
+            fprintf(_fje,"\n");
         }
      }
    //std::cout << "    cirkovic: el(" << _v_Muon->size() << ")" << std::endl;
@@ -527,6 +568,22 @@ void Hist::fill()
                     mu.charge()*13, mu.pt(), mu.eta(), mu.phi(),
                     metpt, metphi,
                     njets, nbjets);
+            //fprintf(_fjm,"%6d %6d %10d  %+2d  %6.2f %+4.2f %+4.2f   %6.1f  %+4.2f    %d %d  %6.2f %+4.2f %+4.2f\n",
+            //      run, lumi, id,
+            //      mu.charge()*13, mu.pt(), mu.eta(), mu.phi(),
+            //      metpt, metphi,
+            //      njets, nbjets,
+            //      _v_JetTight->at(0).pt(), _v_JetTight->at(0).eta(), _v_JetTight->at(0).phi());
+            fprintf(_fjm,"%6d %6d %10d  %+2d  %6.2f %+4.2f %+4.2f   %6.1f  %+4.2f    %d %d",
+                    run, lumi, id,
+                    mu.charge()*13, mu.pt(), mu.eta(), mu.phi(),
+                    metpt, metphi,
+                    njets, nbjets);
+            for(int i=0;i<_v_JetTight->size();i++)
+                 fprintf(_fjm,"  %6.2f %+4.2f %+4.2f",
+                    _v_JetTight->at(i).pt(), _v_JetTight->at(i).eta(), _v_JetTight->at(i).phi());
+            fprintf(_fjm,"\n");
+
      }
    //std::cout << "    done" << std::endl;
 
@@ -739,6 +796,8 @@ void Hist::close()
   fclose(_flep);
   fclose(_felv);
   fclose(_felv1);
+  fclose(_fje);
+  fclose(_fjm);
 
 //   delete rnd;
 }

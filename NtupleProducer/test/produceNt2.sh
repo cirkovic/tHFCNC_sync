@@ -17,7 +17,7 @@ make
 cd test
 
 OPTIONS=""
-OPTIONS="$OPTIONS --file list1.txt" # txt file with the list of input FlatTree files to read
+OPTIONS="$OPTIONS --file list2.txt" # txt file with the list of input FlatTree files to read
 OPTIONS="$OPTIONS --tree FlatTree/tree" # name of FlatTree TTree directory
 OPTIONS="$OPTIONS --outfile output_mu" # name of the output ROOT file
 OPTIONS="$OPTIONS --noe 45000" # initial number of events for considered dataset to be used for normalization
@@ -30,10 +30,8 @@ OPTIONS="$OPTIONS --sync 1" # 1 for muons, 0 for electrons
 
 ./NtupleProducer $OPTIONS
 
-exit
-
 OPTIONS=""
-OPTIONS="$OPTIONS --file list1.txt" # txt file with the list of input FlatTree files to read
+OPTIONS="$OPTIONS --file list2.txt" # txt file with the list of input FlatTree files to read
 OPTIONS="$OPTIONS --tree FlatTree/tree" # name of FlatTree TTree directory
 OPTIONS="$OPTIONS --outfile output_el" # name of the output ROOT file
 OPTIONS="$OPTIONS --noe 45000" # initial number of events for considered dataset to be used for normalization

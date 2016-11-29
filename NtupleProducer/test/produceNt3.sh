@@ -17,7 +17,7 @@ make
 cd test
 
 OPTIONS=""
-OPTIONS="$OPTIONS --file list1.txt" # txt file with the list of input FlatTree files to read
+OPTIONS="$OPTIONS --file list3.txt" # txt file with the list of input FlatTree files to read
 OPTIONS="$OPTIONS --tree FlatTree/tree" # name of FlatTree TTree directory
 OPTIONS="$OPTIONS --outfile output_mu" # name of the output ROOT file
 OPTIONS="$OPTIONS --noe 45000" # initial number of events for considered dataset to be used for normalization
@@ -30,25 +30,10 @@ OPTIONS="$OPTIONS --sync 1" # 1 for muons, 0 for electrons
 
 ./NtupleProducer $OPTIONS
 
-exit
+echo `cat events.txt`      
+echo `cat muons.txt`       
+echo `cat tmuons.txt`      
+echo `cat nlelectrons.txt` 
+echo `cat vlmuons.txt`     
+echo `cat jetsm.txt`       
 
-OPTIONS=""
-OPTIONS="$OPTIONS --file list1.txt" # txt file with the list of input FlatTree files to read
-OPTIONS="$OPTIONS --tree FlatTree/tree" # name of FlatTree TTree directory
-OPTIONS="$OPTIONS --outfile output_el" # name of the output ROOT file
-OPTIONS="$OPTIONS --noe 45000" # initial number of events for considered dataset to be used for normalization
-OPTIONS="$OPTIONS --xsec 1.0" # cross section for considered dataset to be used for normalization
-OPTIONS="$OPTIONS --nmax -1" # max number of events to process (-1: no limit)
-OPTIONS="$OPTIONS --isdata 0" # run on data or MC
-OPTIONS="$OPTIONS --stream -1" # 0: SingleElectron, 1: SingleMuon (only for data)
-OPTIONS="$OPTIONS --issig 0" # flag to mark signal events (1: signal)
-OPTIONS="$OPTIONS --sync 0" # 1 for muons, 0 for electrons
-
-./NtupleProducer $OPTIONS
-
-echo `cat events.txt`      `cat events.txt`
-echo `cat muons.txt`       `cat electrons.txt`
-echo `cat tmuons.txt`      `cat melectrons.txt`
-echo `cat nlelectrons.txt` `cat nlmuons.txt`
-echo `cat vlmuons.txt`     `cat vlelectrons.txt`
-echo `cat jetsm.txt`       `cat jetse.txt`

@@ -152,7 +152,6 @@ void Electron::sel()
 	       _isLooseCBId &&
 	      true );
 
-   /*
    _isMedium = (
            passPtMedium &&
            passEtaMedium &&
@@ -160,11 +159,11 @@ void Electron::sel()
            //passDz &&
            //passCrack &&
            //passConversionVeto &&
-           passRelIsoMedium &&
+           //passRelIsoMedium &&
            _isMediumCBId &&
           true );
-    */
 
+    /*
     if (fabs(_superClusterEta) <= 1.479) {
        _isMedium = (
                passPtMedium &&
@@ -193,6 +192,7 @@ void Electron::sel()
                passConversionVeto                &&
               true );
     }
+    */
 
    _isTight = (
 	       _isLoose &&
