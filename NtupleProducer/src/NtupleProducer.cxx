@@ -139,12 +139,75 @@ int main(int argc, char *argv[])
    FILE *_fev5 = fopen("/afs/cern.ch/user/c/cirkovic/www/16c-11-2016/FCNC_sync_2/eventlist5.txt", "w");
    FILE *_fev6 = fopen("/afs/cern.ch/user/c/cirkovic/www/16c-11-2016/FCNC_sync_2/eventlist6.txt", "w");
    */
+   /*
    FILE *_fev1 = fopen("/afs/cern.ch/user/c/cirkovic/www/16d-11-2016/FCNC_sync_2/eventlist1.txt", "w");
    FILE *_fev2 = fopen("/afs/cern.ch/user/c/cirkovic/www/16d-11-2016/FCNC_sync_2/eventlist2.txt", "w");
    FILE *_fev3 = fopen("/afs/cern.ch/user/c/cirkovic/www/16d-11-2016/FCNC_sync_2/eventlist3.txt", "w");
    FILE *_fev4 = fopen("/afs/cern.ch/user/c/cirkovic/www/16d-11-2016/FCNC_sync_2/eventlist4.txt", "w");
    FILE *_fev5 = fopen("/afs/cern.ch/user/c/cirkovic/www/16d-11-2016/FCNC_sync_2/eventlist5.txt", "w");
    FILE *_fev6 = fopen("/afs/cern.ch/user/c/cirkovic/www/16d-11-2016/FCNC_sync_2/eventlist6.txt", "w");
+   */
+   /*
+   FILE *_fev1 = fopen("/afs/cern.ch/user/c/cirkovic/www/29-11-2016/FCNC_syn_1/eventlist1.txt", "w");
+   FILE *_fev2 = fopen("/afs/cern.ch/user/c/cirkovic/www/29-11-2016/FCNC_syn_1/eventlist2.txt", "w");
+   FILE *_fev3 = fopen("/afs/cern.ch/user/c/cirkovic/www/29-11-2016/FCNC_syn_1/eventlist3.txt", "w");
+   FILE *_fev4 = fopen("/afs/cern.ch/user/c/cirkovic/www/29-11-2016/FCNC_syn_1/eventlist4.txt", "w");
+   FILE *_fev5 = fopen("/afs/cern.ch/user/c/cirkovic/www/29-11-2016/FCNC_syn_1/eventlist5.txt", "w");
+   FILE *_fev6 = fopen("/afs/cern.ch/user/c/cirkovic/www/29-11-2016/FCNC_syn_1/eventlist6.txt", "w");
+   FILE *_fev7 = fopen("/afs/cern.ch/user/c/cirkovic/www/29-11-2016/FCNC_syn_1/eventlist7.txt", "w");
+   FILE *_fev8 = fopen("/afs/cern.ch/user/c/cirkovic/www/29-11-2016/FCNC_syn_1/eventlist8.txt", "w");
+   */
+   FILE *_fev1;
+   FILE *_fev2;
+   FILE *_fev3;
+   FILE *_fev4;
+   FILE *_fev5;
+   FILE *_fev6;
+   FILE *_fev7;
+   FILE *_fev8;
+
+   /*
+   if (leptontype) {
+    _fev1 = fopen("/afs/cern.ch/user/c/cirkovic/www/29-11-2016/FCNC_syn_mu/eventlist1.txt", "w");
+    _fev2 = fopen("/afs/cern.ch/user/c/cirkovic/www/29-11-2016/FCNC_syn_mu/eventlist2.txt", "w");
+    _fev3 = fopen("/afs/cern.ch/user/c/cirkovic/www/29-11-2016/FCNC_syn_mu/eventlist3.txt", "w");
+    _fev4 = fopen("/afs/cern.ch/user/c/cirkovic/www/29-11-2016/FCNC_syn_mu/eventlist4.txt", "w");
+    _fev5 = fopen("/afs/cern.ch/user/c/cirkovic/www/29-11-2016/FCNC_syn_mu/eventlist5.txt", "w");
+    _fev6 = fopen("/afs/cern.ch/user/c/cirkovic/www/29-11-2016/FCNC_syn_mu/eventlist6.txt", "w");
+    _fev7 = fopen("/afs/cern.ch/user/c/cirkovic/www/29-11-2016/FCNC_syn_mu/eventlist7.txt", "w");
+    _fev8 = fopen("/afs/cern.ch/user/c/cirkovic/www/29-11-2016/FCNC_syn_mu/eventlist8.txt", "w");
+   }
+   else {
+    _fev1 = fopen("/afs/cern.ch/user/c/cirkovic/www/29-11-2016/FCNC_syn_el/eventlist1.txt", "w");
+    _fev2 = fopen("/afs/cern.ch/user/c/cirkovic/www/29-11-2016/FCNC_syn_el/eventlist2.txt", "w");
+    _fev3 = fopen("/afs/cern.ch/user/c/cirkovic/www/29-11-2016/FCNC_syn_el/eventlist3.txt", "w");
+    _fev4 = fopen("/afs/cern.ch/user/c/cirkovic/www/29-11-2016/FCNC_syn_el/eventlist4.txt", "w");
+    _fev5 = fopen("/afs/cern.ch/user/c/cirkovic/www/29-11-2016/FCNC_syn_el/eventlist5.txt", "w");
+    _fev6 = fopen("/afs/cern.ch/user/c/cirkovic/www/29-11-2016/FCNC_syn_el/eventlist6.txt", "w");
+    _fev7 = fopen("/afs/cern.ch/user/c/cirkovic/www/29-11-2016/FCNC_syn_el/eventlist7.txt", "w");
+    _fev8 = fopen("/afs/cern.ch/user/c/cirkovic/www/29-11-2016/FCNC_syn_el/eventlist8.txt", "w");
+  }
+   */
+   if (leptontype) {
+    _fev1 = fopen("/afs/cern.ch/user/c/cirkovic/www/30-11-2016/FCNC_syn_mu/eventlist1.txt", "w");
+    _fev2 = fopen("/afs/cern.ch/user/c/cirkovic/www/30-11-2016/FCNC_syn_mu/eventlist2.txt", "w");
+    _fev3 = fopen("/afs/cern.ch/user/c/cirkovic/www/30-11-2016/FCNC_syn_mu/eventlist3.txt", "w");
+    _fev4 = fopen("/afs/cern.ch/user/c/cirkovic/www/30-11-2016/FCNC_syn_mu/eventlist4.txt", "w");
+    _fev5 = fopen("/afs/cern.ch/user/c/cirkovic/www/30-11-2016/FCNC_syn_mu/eventlist5.txt", "w");
+    _fev6 = fopen("/afs/cern.ch/user/c/cirkovic/www/30-11-2016/FCNC_syn_mu/eventlist6.txt", "w");
+    _fev7 = fopen("/afs/cern.ch/user/c/cirkovic/www/30-11-2016/FCNC_syn_mu/eventlist7.txt", "w");
+    _fev8 = fopen("/afs/cern.ch/user/c/cirkovic/www/30-11-2016/FCNC_syn_mu/eventlist8.txt", "w");
+   }
+   else {
+    _fev1 = fopen("/afs/cern.ch/user/c/cirkovic/www/30-11-2016/FCNC_syn_el/eventlist1.txt", "w");
+    _fev2 = fopen("/afs/cern.ch/user/c/cirkovic/www/30-11-2016/FCNC_syn_el/eventlist2.txt", "w");
+    _fev3 = fopen("/afs/cern.ch/user/c/cirkovic/www/30-11-2016/FCNC_syn_el/eventlist3.txt", "w");
+    _fev4 = fopen("/afs/cern.ch/user/c/cirkovic/www/30-11-2016/FCNC_syn_el/eventlist4.txt", "w");
+    _fev5 = fopen("/afs/cern.ch/user/c/cirkovic/www/30-11-2016/FCNC_syn_el/eventlist5.txt", "w");
+    _fev6 = fopen("/afs/cern.ch/user/c/cirkovic/www/30-11-2016/FCNC_syn_el/eventlist6.txt", "w");
+    _fev7 = fopen("/afs/cern.ch/user/c/cirkovic/www/30-11-2016/FCNC_syn_el/eventlist7.txt", "w");
+    _fev8 = fopen("/afs/cern.ch/user/c/cirkovic/www/30-11-2016/FCNC_syn_el/eventlist8.txt", "w");
+  }
 
    std::cout << fname << std::endl;
    Tree tree(0,const_cast<char*>(fname),stream);
@@ -188,7 +251,8 @@ int main(int argc, char *argv[])
    std::cout << "Input events = " << nentries << std::endl;
    
    int Nev = 0;
-   int Ntm = 0;
+   int Nmet = 0;
+   int Ntl = 0;
    int N1xl = 0; //int N1tm = 0;   //int N1me = 0;
    int Nnll = 0;
    int Nvll = 0;
@@ -205,75 +269,29 @@ int main(int argc, char *argv[])
 	// event
 	ev.init();
 	ev.read(xsec,noe,dataStream,issig,isttbar);
-    //std::cout << "isFake: " << ev.isFake() << ", ndof: " ev.ndof() << ", rho: " << ev.rho() << ", z: " << ev.z() << std::endl;
-    if (ev.isFake() || ev.ndof() < 4 || ev.pv_rho() > 2 || fabs(ev.z()) > 24) {
-    //if (ev.isFake() || ev.ndof() < 4 || ev.rho() > 2 || fabs(ev.z()) > 24) {
-        std::cout << "isFake: " << ev.isFake() << ", ndof: " << ev.ndof() << ", rho: " << ev.pv_rho() << ", z: " << ev.z() << std::endl;
-        continue;
-    }
+
+    fprintf(_fev1,"%6d %6d %10d", ev.run(), ev.lumi(), ev.id());
+    fprintf(_fev1,"\n");
+
+    if (ev.isFake() || ev.ndof() < 4 || ev.pv_rho() > 2 || fabs(ev.z()) > 24) continue;
     Nev++;
 
-    //fprintf(_fev,"%6d %6d %10d\n", ev.id(), ev.run(), ev.lumi());
-    //fprintf(_fev,"%6d %6d %10d %6d %6.5f %6.5f %6.5f  \n", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
-    //fprintf(_fev1,"%6d %6d %10d %6d %6.5f %6.5f %6.5f  \n", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
-    fprintf(_fev1,"%6d %6d %10d %6d %6.5f %6.5f %6.5f", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
-    for(int j=0;j<ntP->jet_n;j++)
-      {
-         idx = j;
+    fprintf(_fev2,"%6d %6d %10d", ev.run(), ev.lumi(), ev.id());
+    fprintf(_fev2,"\n");
 
-         jet.init();
-         jet.read();
-         jet.sel();
+    if (!ev.passMETFilters()) continue;
+    Nmet++;
 
-         //if( jet.isTight() )
-         if( jet.isLoose() )
-             fprintf(_fev1,"  %6.2f %+4.2f %+4.2f",
-                jet.pt(), jet.eta(), jet.phi());
-      }
-    fprintf(_fev1,"\n");
-    /*
+    fprintf(_fev3,"%6d %6d %10d", ev.run(), ev.lumi(), ev.id());
+    fprintf(_fev3,"\n");
+
     if (leptontype && (!ev.isTrigMuon())) continue;
     else if ((!leptontype) && (!ev.isTrigElec())) continue;
-    Ntm++;
+    Ntl++;
 
-    //fprintf(_fev2,"%6d %6d %10d %6d %6.5f %6.5f %6.5f  \n", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
-    fprintf(_fev2,"%6d %6d %10d %6d %6.5f %6.5f %6.5f", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
-    for(int j=0;j<ntP->jet_n;j++)
-      {
-         idx = j;
+    fprintf(_fev4,"%6d %6d %10d", ev.run(), ev.lumi(), ev.id());
+    fprintf(_fev4,"\n");
 
-         jet.init();
-         jet.read();
-         jet.sel();
-
-         if( jet.isTight() )
-             fprintf(_fev2,"  %6.2f %+4.2f %+4.2f",
-                jet.pt(), jet.eta(), jet.phi());
-      }
-    fprintf(_fev2,"\n");
-    */
-
-    if (!ev.isTrigMuon() && !ev.isTrigElec()) continue;
-    Ntm++;
-
-    //fprintf(_fev2,"%6d %6d %10d %6d %6.5f %6.5f %6.5f  \n", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
-    fprintf(_fev2,"%6d %6d %10d %6d %6.5f %6.5f %6.5f", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
-    for(int j=0;j<ntP->jet_n;j++)
-      {
-         idx = j;
-
-         jet.init();
-         jet.read();
-         jet.sel();
-
-         //if( jet.isTight() )
-         if( jet.isLoose() )
-             fprintf(_fev2,"  %6.2f %+4.2f %+4.2f",
-                jet.pt(), jet.eta(), jet.phi());
-      }
-    fprintf(_fev2,"\n");
-
-	
 	nt->NtEvent->push_back(ev);
 	
 	// muons
@@ -308,10 +326,6 @@ int main(int argc, char *argv[])
          if( el.isLoose() && ! el.isMedium() ) nt->NtElectronLooseExtra->push_back(el);
 	  }
 
-    //if (leptontype && (!ev.isTrigMuon())) continue;
-    //else if ((!leptontype) && (!ev.isTrigElec())) continue;
-    //Ntm++;
-
     int nElecLoose = nt->NtElectronLoose->size();
     int nMuonLoose = nt->NtMuonLoose->size();
 
@@ -326,64 +340,22 @@ int main(int argc, char *argv[])
     else if ((!leptontype) && (nElecMedium != 1)) continue;
     N1xl++;
 
-    //fprintf(_fev3,"%6d %6d %10d %6d %6.5f %6.5f %6.5f  \n", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
-    fprintf(_fev3,"%6d %6d %10d %6d %6.5f %6.5f %6.5f", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
-    for(int j=0;j<ntP->jet_n;j++)
-      {
-         idx = j;
-
-         jet.init();
-         jet.read();
-         jet.sel();
-
-         //if( jet.isTight() )
-         if( jet.isLoose() )
-             fprintf(_fev3,"  %6.2f %+4.2f %+4.2f",
-                jet.pt(), jet.eta(), jet.phi());
-      }
-    fprintf(_fev3,"\n");
+    fprintf(_fev5,"%6d %6d %10d", ev.run(), ev.lumi(), ev.id());
+    fprintf(_fev5,"\n");
 
     if (leptontype && (nElecLoose > 0)) continue;
     else if ((!leptontype) && (nMuonLoose > 0)) continue;
     Nnll++;
 
-    //fprintf(_fev4,"%6d %6d %10d %6d %6.5f %6.5f %6.5f  \n", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
-    fprintf(_fev4,"%6d %6d %10d %6d %6.5f %6.5f %6.5f", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
-    for(int j=0;j<ntP->jet_n;j++)
-      {
-         idx = j;
-
-         jet.init();
-         jet.read();
-         jet.sel();
-
-         //if( jet.isTight() )
-         if( jet.isLoose() )
-             fprintf(_fev4,"  %6.2f %+4.2f %+4.2f",
-                jet.pt(), jet.eta(), jet.phi());
-      }
-    fprintf(_fev4,"\n");
+    fprintf(_fev6,"%6d %6d %10d", ev.run(), ev.lumi(), ev.id());
+    fprintf(_fev6,"\n");
 
     if (leptontype && (nMuonLooseExtra > 0)) continue;
     else if ((!leptontype) && (nElecLooseExtra > 0)) continue;
     Nvll++;
 
-    //fprintf(_fev5,"%6d %6d %10d %6d %6.5f %6.5f %6.5f  \n", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
-    fprintf(_fev5,"%6d %6d %10d %6d %6.5f %6.5f %6.5f", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
-    for(int j=0;j<ntP->jet_n;j++)
-      {
-         idx = j;
-
-         jet.init();
-         jet.read();
-         jet.sel();
-
-         //if( jet.isTight() )
-         if( jet.isLoose() )
-             fprintf(_fev5,"  %6.2f %+4.2f %+4.2f",
-                jet.pt(), jet.eta(), jet.phi());
-      }
-    fprintf(_fev5,"\n");
+    fprintf(_fev7,"%6d %6d %10d", ev.run(), ev.lumi(), ev.id());
+    fprintf(_fev7,"\n");
 
 	// jets
 	for(int j=0;j<ntP->jet_n;j++)
@@ -429,59 +401,60 @@ int main(int argc, char *argv[])
 	  }
     */
     //if (nJetTight < 3) continue;
-    //if (nJetLoose < 3) continue;
-    if (nJetLoose < 2) continue;
+    if (nJetLoose < 3) continue;
+    //if (nJetLoose < 2) continue;
     N3j++;
 
-    //CIRKOVICfprintf(_fev6,"%6d %6d %10d %6d %6.5f %6.5f %6.5f  \n", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
-    fprintf(_fev6,"%6d %6d %10d %6d %6.5f %6.5f %6.5f", ev.run(), ev.lumi(), ev.id(), ev.isFake(), ev.ndof(), ev.pv_rho(), ev.z());
-    for(int j=0;j<ntP->jet_n;j++)
-      {
-         idx = j;
-
-         jet.init();
-         jet.read();
-         jet.sel();
-
-         //if( jet.isTight() )
-         if( jet.isLoose() )
-             fprintf(_fev6,"  %6.2f %+4.2f %+4.2f",
-                jet.pt(), jet.eta(), jet.phi());
-      }
-    fprintf(_fev6,"\n");
-
+    fprintf(_fev8,"%6d %6d %10d", ev.run(), ev.lumi(), ev.id());
+    fprintf(_fev8,"\n");
 
     //std::cout << "cirkovic: filling #" << N3j << std::endl;
     nt->fill();
    }
 
-   evfile.open("events.txt");
+
+   if (leptontype)
+      evfile.open("events_mu.txt");
+   else
+      evfile.open("events_el.txt");
    evfile << Nev << "\n";
    evfile.close();
+
+   if (leptontype)
+       evfile.open("metfilters_mu.txt");
+   else
+       evfile.open("metfilters_el.txt");
+   evfile << Nmet << "\n";
+   evfile.close();
+
    if (leptontype)
        lepfile.open("muons.txt");
    else
        lepfile.open("electrons.txt");
-   lepfile << Ntm << "\n";
+   lepfile << Ntl << "\n";
    lepfile.close();
+
    if (leptontype)
        wplfile.open("tmuons.txt");
    else
        wplfile.open("melectrons.txt");
    wplfile << N1xl << "\n";
    wplfile.close();
+
    if (leptontype)
        nllfile.open("nlelectrons.txt");
    else
        nllfile.open("nlmuons.txt");
    nllfile << Nnll << "\n";
    nllfile.close();
+
    if (leptontype)
        nvlfile.open("vlmuons.txt");
    else
        nvlfile.open("vlelectrons.txt");
    nvlfile << Nvll << "\n";
    nvlfile.close();
+
    if (leptontype)
        jetfile.open("jetsm.txt");
    else
@@ -489,13 +462,14 @@ int main(int argc, char *argv[])
    jetfile << N3j << "\n";
    jetfile.close();
 
-   //fclose(_fev);
    fclose(_fev1);
    fclose(_fev2);
    fclose(_fev3);
    fclose(_fev4);
    fclose(_fev5);
    fclose(_fev6);
+   fclose(_fev7);
+   fclose(_fev8);
 
    std::cout << "Output events = " << nt->m_tree->GetEntries() << std::endl;
 

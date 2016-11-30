@@ -1,0 +1,1 @@
+/afs/cern.ch/work/c/cirkovic/FlatTree_sync1/CMSSW_8_0_12/src/FlatTree/FlatTreeProducer/test1/output_SingleElectron.root

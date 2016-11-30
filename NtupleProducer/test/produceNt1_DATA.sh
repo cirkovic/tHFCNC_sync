@@ -19,14 +19,14 @@ cd test
 PSs=""
 
 OPTIONS=""
-OPTIONS="$OPTIONS --file list1.txt" # txt file with the list of input FlatTree files to read
+OPTIONS="$OPTIONS --file list1_SingleMuon.txt" # txt file with the list of input FlatTree files to read
 OPTIONS="$OPTIONS --tree FlatTree/tree" # name of FlatTree TTree directory
 OPTIONS="$OPTIONS --outfile output_mu" # name of the output ROOT file
-OPTIONS="$OPTIONS --noe 45000" # initial number of events for considered dataset to be used for normalization
+OPTIONS="$OPTIONS --noe 98841" # initial number of events for considered dataset to be used for normalization
 OPTIONS="$OPTIONS --xsec 1.0" # cross section for considered dataset to be used for normalization
 OPTIONS="$OPTIONS --nmax -1" # max number of events to process (-1: no limit)
-OPTIONS="$OPTIONS --isdata 0" # run on data or MC
-OPTIONS="$OPTIONS --stream -1" # 0: SingleElectron, 1: SingleMuon (only for data)
+OPTIONS="$OPTIONS --isdata 1" # run on data or MC
+OPTIONS="$OPTIONS --stream 1" # 0: SingleElectron, 1: SingleMuon (only for data)
 OPTIONS="$OPTIONS --issig 0" # flag to mark signal events (1: signal)
 OPTIONS="$OPTIONS --sync 1" # 1 for muons, 0 for electrons
 
@@ -36,14 +36,14 @@ PSs="$PSs $!"
 #exit
 
 OPTIONS=""
-OPTIONS="$OPTIONS --file list1.txt" # txt file with the list of input FlatTree files to read
+OPTIONS="$OPTIONS --file list1_SingleElectron.txt" # txt file with the list of input FlatTree files to read
 OPTIONS="$OPTIONS --tree FlatTree/tree" # name of FlatTree TTree directory
 OPTIONS="$OPTIONS --outfile output_el" # name of the output ROOT file
-OPTIONS="$OPTIONS --noe 45000" # initial number of events for considered dataset to be used for normalization
+OPTIONS="$OPTIONS --noe 92349" # initial number of events for considered dataset to be used for normalization
 OPTIONS="$OPTIONS --xsec 1.0" # cross section for considered dataset to be used for normalization
 OPTIONS="$OPTIONS --nmax -1" # max number of events to process (-1: no limit)
-OPTIONS="$OPTIONS --isdata 0" # run on data or MC
-OPTIONS="$OPTIONS --stream -1" # 0: SingleElectron, 1: SingleMuon (only for data)
+OPTIONS="$OPTIONS --isdata 1" # run on data or MC
+OPTIONS="$OPTIONS --stream 0" # 0: SingleElectron, 1: SingleMuon (only for data)
 OPTIONS="$OPTIONS --issig 0" # flag to mark signal events (1: signal)
 OPTIONS="$OPTIONS --sync 0" # 1 for muons, 0 for electrons
 
@@ -52,7 +52,7 @@ PSs="$PSs $!"
 
 wait $PSs
 
-echo 45000                   45000
+echo 98841                   92349
 echo `cat events_mu.txt`     `cat events_el.txt`
 echo `cat metfilters_mu.txt` `cat metfilters_el.txt`
 echo `cat muons.txt`         `cat electrons.txt`

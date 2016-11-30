@@ -98,6 +98,7 @@ public :
    Float_t         met_shiftedSumEt_NoShift;
    Float_t         met_shiftedSumEt_PhotonEnUp;
    Float_t         met_shiftedSumEt_PhotonEnDown;
+   Int_t           met_passMETFilters;
    Float_t         metNoHF_pt;
    Float_t         metNoHF_phi;
    Float_t         metNoHF_sumet;
@@ -670,6 +671,7 @@ public :
    TBranch        *b_met_shiftedSumEt_NoShift;   //!
    TBranch        *b_met_shiftedSumEt_PhotonEnUp;   //!
    TBranch        *b_met_shiftedSumEt_PhotonEnDown;   //!
+   TBranch        *b_met_passMETFilters;   //!
    TBranch        *b_metNoHF_pt;   //!
    TBranch        *b_metNoHF_phi;   //!
    TBranch        *b_metNoHF_sumet;   //!

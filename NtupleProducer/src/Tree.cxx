@@ -587,6 +587,7 @@ void Tree::Init(TChain *ch)
    fChain->SetBranchAddress("met_shiftedSumEt_NoShift", &met_shiftedSumEt_NoShift, &b_met_shiftedSumEt_NoShift);
    fChain->SetBranchAddress("met_shiftedSumEt_PhotonEnUp", &met_shiftedSumEt_PhotonEnUp, &b_met_shiftedSumEt_PhotonEnUp);
    fChain->SetBranchAddress("met_shiftedSumEt_PhotonEnDown", &met_shiftedSumEt_PhotonEnDown, &b_met_shiftedSumEt_PhotonEnDown);
+   fChain->SetBranchAddress("met_passMETFilters", &met_passMETFilters, &b_met_passMETFilters);
    fChain->SetBranchAddress("metNoHF_pt", &metNoHF_pt, &b_metNoHF_pt);
    fChain->SetBranchAddress("metNoHF_phi", &metNoHF_phi, &b_metNoHF_phi);
    fChain->SetBranchAddress("metNoHF_sumet", &metNoHF_sumet, &b_metNoHF_sumet);

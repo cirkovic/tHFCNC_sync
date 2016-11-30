@@ -20,6 +20,7 @@ class Event : public Base
    float metpt()         {return _metpt;};
    float metphi()         {return _metphi;};
    float metsumet()         {return _metsumet;};
+   bool  passMETFilters()     {return _met_passMETFilters;};
    
    float mc_weight()         {return _mc_weight;};
 
@@ -51,6 +52,7 @@ class Event : public Base
    float _metpt;
    float _metphi;
    float _metsumet;
+   float _met_passMETFilters;
 
    float _mc_weight;
 
